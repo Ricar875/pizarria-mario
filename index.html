@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>Pizzaria e Petiscaria do Mário | Cardápio digital</title>
+<meta name="description" content="Confira pizzas, brotinhos, petiscos e bebidas da Pizzaria e Petiscaria do Mário. Faça seu pedido pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101010;--panel:#1b1b1b;--panel2:#242424;--yellow:#ffc928;--white:#fff;--muted:#bdbdbd;--green:#25d366;--line:#343434}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:"DM Sans",sans-serif}a{color:inherit;text-decoration:none}button,select{font:inherit}button{cursor:pointer}.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
+.top{background:var(--yellow);color:#111;text-align:center;padding:9px;font-weight:800;font-size:13px}
+header{position:sticky;top:0;z-index:10;background:#101010ed;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font:700 19px Oswald,sans-serif;display:flex;align-items:center;gap:10px}.mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:#111;font-size:23px}.brand small{display:block;font:700 10px "DM Sans";letter-spacing:2px;color:var(--muted)}
+.links{display:flex;gap:18px;font-size:13px;color:#ddd}.links a:hover{color:var(--yellow)}
+.btn{border:0;border-radius:30px;padding:12px 17px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:7px}.yellow{background:var(--yellow);color:#111}.green{background:var(--green);color:#063b18}.outline{background:transparent;border:1px solid #666;color:#fff}
+.hero{padding:62px 0 54px;background:radial-gradient(ellipse at 85% 20%,#49350c 0,transparent 38%),linear-gradient(135deg,#191919,#101010)}
+.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}.eyebrow{color:var(--yellow);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+h1,h2,h3{font-family:Oswald,sans-serif}h1{font-size:clamp(43px,7vw,76px);line-height:1;margin:12px 0}h1 span{color:var(--yellow)}.hero p{color:#ddd;line-height:1.7;max-width:590px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.hero-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.hero-tile{min-height:118px;border:1px solid #51401b;border-radius:16px;background:linear-gradient(145deg,#30250f,#1b1b1b);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;font-size:16px;font-weight:800}.hero-tile b{font-size:32px;margin-bottom:5px}
+.section{padding:60px 0}.dark{background:#151515}.heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.heading h2{font-size:clamp(30px,5vw,43px);margin:5px 0}.heading p{max-width:440px;color:var(--muted);line-height:1.6;margin:0}
+.notice{border:1px solid #725c1e;background:#30270f;color:#f7e8b7;border-radius:12px;padding:13px 16px;margin:20px 0;font-size:14px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.filter{background:transparent;border:1px solid #555;color:#eee;border-radius:25px;padding:9px 14px;font-weight:700}.filter.active,.filter:hover{background:var(--yellow);border-color:var(--yellow);color:#111}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.product{background:var(--panel);border:1px solid #333;border-radius:16px;padding:17px;display:flex;flex-direction:column;min-height:185px}.product h3{font-size:21px;margin:0 0 7px;text-transform:none}.product p{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 12px}.price{color:var(--yellow);font-weight:800;margin:8px 0 13px}.product .btn{align-self:flex-start;margin-top:auto}.small{font-size:12px;padding:9px 13px}
+.cartbox{position:sticky;bottom:0;z-index:9;background:#191919f5;border-top:1px solid #454545;padding:11px 0;backdrop-filter:blur(10px)}.cartrow{display:flex;align-items:center;justify-content:space-between;gap:12px}.cartinfo strong{color:var(--yellow)}.cartinfo small{display:block;color:var(--muted);font-size:12px}
+.builder{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:var(--panel);border:1px solid #333;border-radius:20px;padding:24px}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:800;margin-bottom:7px}.field select,.field input{width:100%;background:#101010;color:white;border:1px solid #555;border-radius:9px;padding:12px}.check{display:flex;gap:8px;align-items:center;color:#ddd;font-size:14px;margin:14px 0}.check input{accent-color:var(--yellow)}
+footer{padding:35px 0 95px;border-top:1px solid #333;color:var(--muted)}.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:20px}footer h3{color:white;margin-top:0}footer p{font-size:14px;line-height:1.7}
+.floating{position:fixed;right:17px;bottom:85px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#063b18;font-size:25px;z-index:12;box-shadow:0 6px 22px #0009}
+@media(max-width:850px){.links{display:none}.hero-inner,.builder{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.heading{align-items:start;flex-direction:column}}
+@media(max-width:560px){.wrap{width:calc(100% - 24px)}.hero{padding:42px 0}.hero-menu{gap:8px}.hero-tile{min-height:94px;font-size:14px}.grid{grid-template-columns:1fr}.section{padding:45px 0}.builder{padding:16px}.footgrid{grid-template-columns:1fr}.cartrow{align-items:flex-start}.cartrow .btn{padding:10px 12px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="top">🍕 Atendimento a partir das 17h · Bairro Barroca</div>
+<header><nav class="wrap">
+<a class="brand" href="#inicio"><span class="mark">🍕</span><span>PIZZARIA E PETISCARIA<small>DO MÁRIO</small></span></a>
+<div class="links"><a href="#pizzas">Pizzas</a><a href="#brotinhos">Brotinhos</a><a href="#petiscos">Petiscos</a><a href="#bebidas">Bebidas</a></div>
+<a class="btn yellow small" href="#pizzas">Ver cardápio</a>
+</nav></header>
 
+<main>
+<section class="hero" id="inicio"><div class="wrap hero-inner">
+<div><div class="eyebrow">Sabor que reúne todo mundo</div><h1>Seu pedido.<br><span>Do seu jeito.</span></h1>
+<p>Escolha seus produtos, adicione ao carrinho e envie tudo de uma vez pelo WhatsApp. A equipe confirma disponibilidade, entrega e pagamento.</p>
+<div class="hero-actions"><a class="btn yellow" href="#pizzas">🍕 Ver cardápio</a><a class="btn outline" href="#bebidas">🥤 Ver bebidas</a></div>
+<p><strong>📍 Bairro Barroca</strong> · Atendimento a partir das 17h</p></div>
+<div class="hero-menu">
+<a class="hero-tile" href="#pizzas"><b>🍕</b>Pizzas</a><a class="hero-tile" href="#brotinhos"><b>🍕</b>Brotinhos</a>
+<a class="hero-tile" href="#petiscos"><b>🍟</b>Petiscos</a><a class="hero-tile" href="#bebidas"><b>🥤</b>Bebidas e sucos</a>
+</div></div></section>
+
+<section class="section" id="pizzas"><div class="wrap">
+<div class="heading"><div><div class="eyebrow">Feitas para você</div><h2>Cardápio de pizzas</h2></div><p>Média (6 fatias) e grande (8 fatias). Escolha o sabor e adicione ao carrinho.</p></div>
+<div class="notice"><strong>Atenção:</strong> lombo, palmito, camarão e bacalhau estão temporariamente em falta. O sabor vegetariana, que leva palmito, também fica indisponível até a reposição.</div>
+<div class="filters" id="pizzaFilters"><button class="filter active" data-filter="todas">Todas</button><button class="filter" data-filter="frango">Frango</button><button class="filter" data-filter="calabresa">Calabresa</button><button class="filter" data-filter="especiais">Especiais</button><button class="filter" data-filter="vegetarianas">Vegetarianas</button></div>
+<div class="grid" id="pizzaGrid"></div>
+</div></section>
+
+<section class="section dark" id="brotinhos"><div class="wrap"><div class="heading"><div><div class="eyebrow">Porção individual</div><h2>Brotinhos</h2></div><p>Escolha seu brotinho e adicione ao pedido.</p></div><div class="grid" id="snackGrid"></div></div></section>
+
+<section class="section" id="petiscos"><div class="wrap"><div class="heading"><div><div class="eyebrow">Para acompanhar</div><h2>Petiscos</h2></div><p>Consulte a equipe para confirmar opções e disponibilidade do dia.</p></div>
+<div class="grid" id="petiscoGrid">
+<article class="product"><h3>🍟 Porções e acompanhamentos</h3><p>Consulte as porções disponíveis, tamanhos e valores pelo WhatsApp.</p><button class="btn yellow small" onclick="askWhats('Olá! Quais porções e petiscos estão disponíveis hoje e quais são os valores?')">Consultar opções</button></article>
+<article class="product"><h3>🍗 Petiscos de frango</h3><p>Consulte opções, quantidade e preço.</p><button class="btn yellow small" onclick="askWhats('Olá! Quais petiscos de frango vocês têm hoje?')">Consultar opções</button></article>
+<article class="product"><h3>🧀 Porções especiais</h3><p>Consulte as opções especiais disponíveis hoje.</p><button class="btn yellow small" onclick="askWhats('Olá! Quais porções especiais estão disponíveis hoje?')">Consultar opções</button></article>
+</div></div></section>
+
+<section class="section dark" id="bebidas"><div class="wrap"><div class="heading"><div><div class="eyebrow">Complete seu pedido</div><h2>Bebidas, sucos e mais</h2></div><p>Os valores e as marcas variam conforme o estoque. Adicione uma consulta ao carrinho ou pergunte pelo WhatsApp.</p></div>
+<div class="grid" id="drinkGrid"></div>
+</div></section>
+
+<section class="section"><div class="wrap"><div class="heading"><div><div class="eyebrow">Sua pizza personalizada</div><h2>Monte sua pizza</h2></div><p>Escolha tamanho, sabores e adicionais. O valor é uma estimativa e será confirmado pela equipe.</p></div>
+<div class="builder"><div>
+<div class="field"><label for="size">Tamanho</label><select id="size"><option value="M">Média — 6 fatias</option><option value="G">Grande — 8 fatias</option></select></div>
+<div class="field"><label for="flavor1">Sabor principal</label><select id="flavor1"></select></div>
+<div class="field"><label for="flavor2">Segundo sabor (opcional)</label><select id="flavor2"><option value="">Sem segundo sabor</option></select></div>
+<div class="field"><label for="edge">Borda recheada</label><select id="edge"><option value="0">Sem borda</option><option value="10">Catupiry — R$ 10,00</option><option value="14">Mussarela — R$ 14,00</option><option value="14">Catupiry original — R$ 14,00</option><option value="10">Cheddar — R$ 10,00</option><option value="14">Cheddar original — R$ 14,00</option><option value="14">Chocolate — R$ 14,00</option></select></div>
+<label class="check"><input type="checkbox" id="thick"> Massa grossa — adicional de R$ 4,00</label>
+</div><div><div class="notice">O preço de pizza meio a meio considera o sabor de maior valor. A equipe confirma o total final.</div><h3>Estimativa: <span id="total" style="color:var(--yellow)">R$ 30,00</span></h3><button class="btn yellow" id="addCustom">➕ Adicionar pizza personalizada</button></div></div>
+</div></section>
+</main>
+
+<div class="cartbox"><div class="wrap cartrow"><div class="cartinfo"><strong id="cartCount">0 itens</strong><small id="cartTotal">Total: R$ 0,00 · bebidas sob consulta</small></div><div style="display:flex;gap:8px"><button class="btn outline small" id="clearCart">Limpar</button><button class="btn green" id="checkout">📲 Finalizar no WhatsApp</button></div></div></div>
+<a class="floating" href="https://wa.me/5575988443412" aria-label="WhatsApp">☏</a>
+
+<footer><div class="wrap footgrid"><div><h3>Pizzaria e Petiscaria do Mário</h3><p>Pizzas, brotinhos, petiscos e bebidas no Bairro Barroca.</p></div><div><h3>Atendimento</h3><p>A partir das 17h<br>Bairro Barroca</p></div><div><h3>Fale conosco</h3><p><a href="https://wa.me/5575988443412">(75) 98844-3412 — pedidos</a><br><a href="https://wa.me/5575991422022">(75) 99142-2022 — contato</a></p></div></div></footer>
+
+<script>
+const WA="5575988443412";
+const brl=v=>Number(v).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+function askWhats(msg){window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank","noopener")}
+const pizzas=[
+{name:"Frango com catupiry",m:30,g:38,cat:"frango",desc:"Molho, frango, catupiry, orégano e azeitona."},
+{name:"Frango com cheddar",m:30,g:38,cat:"frango",desc:"Molho, frango, cheddar, orégano e azeitona."},
+{name:"Frango com queijo",m:32,g:40,cat:"frango",desc:"Molho, frango, queijo, orégano e azeitona."},
+{name:"Caipira",m:32,g:40,cat:"frango",desc:"Molho, frango, milho, queijo, orégano e azeitona."},
+{name:"Calabresa",m:30,g:38,cat:"calabresa",desc:"Molho, queijo, calabresa, orégano e azeitona."},
+{name:"Calabresa com cebola",m:30,g:38,cat:"calabresa",desc:"Molho, queijo, calabresa, cebola, orégano e azeitona."},
+{name:"Portuguesa",m:32,g:43,cat:"especiais",desc:"Molho, presunto, ervilha, ovo, cebola, queijo, tomate e pimentão."},
+{name:"Três queijos",m:30,g:38,cat:"especiais",desc:"Molho, mussarela, cheddar, catupiry, orégano e azeitona."},
+{name:"Quatro queijos",m:30,g:38,cat:"especiais",desc:"Molho, mussarela, parmesão, catupiry, cheddar, orégano e azeitona."},
+{name:"Atum",m:32,g:43,cat:"especiais",desc:"Molho, queijo, atum, cebola, orégano e azeitona."},
+{name:"Bacon",m:32,g:43,cat:"especiais",desc:"Molho, queijo, bacon, cebola, orégano e azeitona."},
+{name:"Nordestina",m:32,g:43,cat:"especiais",desc:"Queijo, carne seca, cebola, tomate, orégano e azeitona."},
+{name:"Manjericão",m:32,g:38,cat:"vegetarianas",desc:"Molho, queijo, manjericão, tomate e azeitona."},
+{name:"Romênia",m:30,g:43,cat:"especiais",desc:"Molho, queijo, frango, bacon, orégano e azeitona."},
+{name:"Catupirmilho",m:30,g:38,cat:"frango",desc:"Molho, queijo, milho, catupiry, orégano e azeitona."},
+{name:"Premiata",m:32,g:43,cat:"especiais",desc:"Molho, frango, bacon, tomate, queijo, orégano e azeitona."},
+{name:"Calafrango",m:30,g:41,cat:"frango",desc:"Molho, queijo, frango, calabresa, orégano e azeitona."},
+{name:"Bauru",m:30,g:38,cat:"especiais",desc:"Molho, presunto, queijo, catupiry, tomate, orégano e azeitona."},
+{name:"Calabacon",m:36,g:46,cat:"calabresa",desc:"Molho, queijo, calabresa, bacon, cebola, orégano e azeitona."},
+{name:"Baiana",m:32,g:38,cat:"calabresa",desc:"Molho, queijo, calabresa ralada, cebola, pimenta, orégano e azeitona."},
+{name:"Moda da casa",m:32,g:43,cat:"especiais",desc:"Molho, frango, milho, queijo, bacon, orégano e azeitona."},
+{name:"À moda do Mário",m:40,g:46,cat:"especiais",desc:"Molho, frango, queijo, catupiry, batata palha, orégano e azeitona."},
+{name:"Carne seca ao bacon",m:36,g:46,cat:"especiais",desc:"Molho, queijo, carne seca, bacon, cebola, orégano e azeitona."},
+{name:"Mussarela",m:30,g:38,cat:"vegetarianas",desc:"Molho, queijo, orégano e azeitona."}
+];
+const brotos=[["Frango com catupiry",11],["Frango com cheddar",11],["Frango com queijo",12],["Caipira",12],["Calabresa",11],["Calabresa com cebola",11],["Portuguesa",13],["Três queijos",11],["Quatro queijos",11],["Atum",13],["Bacon",13],["Nordestina",13],["Manjericão",11],["Romênia",13],["Brigadeiro",18],["Napolitana",11],["Premiata",13],["Calafrango",13],["Bauru",11],["Valabacon",13],["Moda da casa",13],["Chocolate ao leite",18],["À moda da casa",13],["Carne seca ao bacon",13],["Mussarela",11]];
+const drinks=[["🥤","Refrigerantes","Coca-Cola, Pepsi, Guaraná, Fanta, Sprite e outras marcas. Tamanhos e valores sob consulta."],["🧃","Sucos naturais","Consulte frutas, sabores, tamanhos e valores disponíveis hoje."],["🧃","Sucos de garrafa e caixinha","Consulte marcas, sabores e tamanhos disponíveis."],["💧","Água mineral","Com ou sem gás. Consulte tamanho e valor."],["🥥","Água de coco","Consulte disponibilidade e preço."],["⚡","Energéticos","Consulte marcas, latas e valores disponíveis."],["🍺","Cervejas","Consulte marcas, tamanhos e disponibilidade."]];
+
+let cart=[];
+function addCart(name,price,detail=""){cart.push({name,price,detail});renderCart()}
+function renderCart(){document.getElementById("cartCount").textContent=`${cart.length} ${cart.length===1?"item":"itens"}`;let total=cart.reduce((s,x)=>s+x.price,0);document.getElementById("cartTotal").textContent=`Total: ${brl(total)}${cart.some(x=>!x.price)?" · alguns valores sob consulta":""}`;}
+function productCard(title,desc,price,action){return `<article class="product"><h3>${title}</h3><p>${desc}</p><div class="price">${price}</div><button class="btn yellow small" onclick="${action}">➕ Adicionar</button></article>`}
+function renderPizzas(filter="todas"){let list=filter==="todas"?pizzas:pizzas.filter(p=>p.cat===filter);document.getElementById("pizzaGrid").innerHTML=list.map(p=>productCard(p.name,p.desc,`Média ${brl(p.m)} · Grande ${brl(p.g)}`,`addPizza('${p.name.replace(/'/g,"\\'")}',${p.m},${p.g})`)).join("")}
+function addPizza(name,m,g){let size=prompt(`Qual tamanho de ${name}? Digite M para média (${brl(m)}) ou G para grande (${brl(g)}).`);if(!size)return;size=size.trim().toUpperCase();if(size!=="M"&&size!=="G"){alert("Digite M ou G.");return}let price=size==="M"?m:g;addCart(`Pizza ${name} — ${size==="M"?"Média":"Grande"}`,price)}
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderPizzas(b.dataset.filter)}));
+
+document.getElementById("snackGrid").innerHTML=brotos.map(([n,p])=>productCard(n,"Brotinho individual",brl(p),`addCart("Brotinho ${n}",${p})`)).join("");
+
+document.getElementById("drinkGrid").innerHTML=drinks.map(([icon,name,desc])=>`<article class="product"><h3>${icon} ${name}</h3><p>${desc}</p><div class="price">Preço sob consulta</div><button class="btn yellow small" onclick="addCart('${name}',0,'Consultar preço')">➕ Adicionar</button></article>`).join("");
+const f1=document.getElementById("flavor1"),f2=document.getElementById("flavor2");
+pizzas.forEach((p,i)=>{f1.add(new Option(`${p.name} — M ${brl(p.m)} / G ${brl(p.g)}`,i));f2.add(new Option(p.name,i))});
+function updateTotal(){let s=document.getElementById("size").value.toLowerCase(),a=pizzas[Number(f1.value)],b=f2.value===""?null:pizzas[Number(f2.value)];let base=Math.max(a[s],b?b[s]:0)+Number(document.getElementById("edge").value)+(document.getElementById("thick").checked?4:0);document.getElementById("total").textContent=brl(base)}
+["size","flavor1","flavor2","edge","thick"].forEach(id=>document.getElementById(id).addEventListener("change",updateTotal));
+document.getElementById("addCustom").addEventListener("click",()=>{let s=document.getElementById("size").value,a=pizzas[Number(f1.value)],b=f2.value===""?null:pizzas[Number(f2.value)],edge=document.getElementById("edge"),edgeName=edge.options[edge.selectedIndex].text,thick=document.getElementById("thick").checked?"massa grossa":"massa tradicional";let price=parseFloat(document.getElementById("total").textContent.replace(/[^\d,]/g,"").replace(",","."));addCart(`Pizza personalizada ${s==="M"?"média":"grande"}: ${a.name}${b?" + "+b.name:""}; ${edgeName}; ${thick}`,price);alert("Pizza adicionada ao carrinho!")});
+document.getElementById("clearCart").addEventListener("click",()=>{cart=[];renderCart()});
+document.getElementById("checkout").addEventListener("click",()=>{if(!cart.length){alert("Adicione pelo menos um produto ao carrinho.");return}let lines=cart.map((x,i)=>`${i+1}. ${x.name}${x.price?` — ${brl(x.price)}`:" — preço a confirmar"}`).join("\n");let total=cart.reduce((s,x)=>s+x.price,0);let msg=`Olá! Gostaria de fazer este pedido na Pizzaria e Petiscaria do Mário:\n\n${lines}\n\nSubtotal dos itens com preço informado: ${brl(total)}\\nPor favor, confirmem disponibilidade, valores pendentes, taxa de entrega, endereço e formas de pagamento.`;askWhats(msg)});
+renderPizzas();updateTotal();renderCart();
+</script>
+</body>
+</html>
