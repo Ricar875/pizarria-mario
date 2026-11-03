@@ -1,1 +1,31 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Painel — Pizzaria do Mário</title>
+<style>body{margin:0;background:#000;color:#fff;font:16px/1.5 system-ui,sans-serif;padding:16px 16px 100px}main{max-width:760px;margin:auto}h1{color:#ffd400;font-size:24px}h2{margin:26px 0 8px;color:#ffd400;font-size:18px}
+input,select{background:#000;color:#fff;border:1px solid #5a4d00;border-radius:8px;padding:10px;font:16px system-ui;width:100%;box-sizing:border-box;margin:4px 0}
+button{background:#ffd400;color:#000;border:0;border-radius:99px;padding:12px 22px;font:700 16px system-ui;cursor:pointer}
+.r{display:grid;grid-template-columns:1fr 74px 74px 78px;gap:8px;align-items:center;border-bottom:1px solid #3d3500;padding:6px 0;font-size:15px}.r.b{grid-template-columns:1fr 90px 78px}
+.r label{display:flex;align-items:center;gap:6px;font-size:13px}.r input[type=checkbox]{width:20px;height:20px;margin:0}.hd{color:#d6d6d6;font-size:12px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#000;border-top:2px solid #ffd400;padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between}#m{color:#ffd400}#e{color:#ffd400}[hidden]{display:none!important}</style></head><body><main>
+<h1>🍕 Painel da Pizzaria do Mário</h1>
+<div id="lg"><p>Entre com o e-mail e a senha do dono.</p><input id="em" type="email" placeholder="E-mail" autocomplete="username"><input id="pw" type="password" placeholder="Senha" autocomplete="current-password"><p id="e"></p><button id="go">Entrar</button></div>
+<div id="pn" hidden><h2>Loja</h2><select id="op"><option value="auto">Aberto/fechado automático (17h às 00h)</option><option value="open">Forçar: ABERTO agora</option><option value="closed">Forçar: FECHADO hoje</option></select>
+<input id="av" placeholder="Aviso do dia (deixe vazio para não mostrar)">
+<h2>Pizzas</h2><p class="hd">Preço 0 = “a confirmar” no site.</p><div class="r hd"><span>Sabor</span><span>Média</span><span>Grande</span><span></span></div><div id="pz"></div>
+<h2>Brotinhos</h2><div class="r b hd"><span>Sabor</span><span>Preço</span><span></span></div><div id="br"></div>
+<div class="bar"><span id="m"></span><button id="sv">Salvar tudo</button></div></div></main>
+<script src="config.js"></script>
+<script>
+const SB=window.SB||{},PZ="Frango com catupiry|30|38;Frango com cheddar|30|38;Frango com queijo|32|40;Caipira|32|40;Calabresa|30|38;Calabresa com cebola|30|38;Portuguesa|32|43;Três queijos|30|38;Quatro queijos|30|38;Atum|32|43;Bacon|32|43;Nordestina|32|43;Manjericão|32|38;Romênia|30|43;Catupirmilho|30|38;Premiata|32|43;Calafrango|30|41;Bauru|30|38;Calabacon|36|46;Baiana|32|38;Moda da casa|32|43;À moda do Mário|40|46;Carne seca ao bacon|36|46;Mussarela|30|38;Lombo|0|0;Palmito|0|0;Camarão|0|0;Bacalhau|0|0".split(";").map(s=>s.split("|")),
+BR="Frango com catupiry|11;Frango com cheddar|11;Frango com queijo|12;Caipira|12;Calabresa|11;Calabresa com cebola|11;Portuguesa|13;Três queijos|11;Quatro queijos|11;Atum|13;Bacon|13;Nordestina|13;Manjericão|11;Romênia|13;Brigadeiro|18;Napolitana|11;Premiata|13;Calafrango|13;Bauru|11;Valabacon|13;Moda da casa|13;Chocolate ao leite|18;À moda da casa|13;Carne seca ao bacon|13;Mussarela|11".split(";").map(s=>s.split("|"));
+let tk="";const $=s=>document.querySelector(s),H=()=>({apikey:SB.key,...(tk?{Authorization:"Bearer "+tk}:{}),"Content-Type":"application/json"});
+if(!SB.url)$("#e").textContent="Falta preencher o arquivo config.js com o endereço e a chave do Supabase.";
+$("#go").onclick=async()=>{$("#e").textContent="";try{const r=await fetch(SB.url+"/auth/v1/token?grant_type=password",{method:"POST",headers:{apikey:SB.key,"Content-Type":"application/json"},body:JSON.stringify({email:$("#em").value.trim(),password:$("#pw").value})});const j=await r.json();if(!j.access_token)throw 0;tk=j.access_token;await load()}catch(x){$("#e").textContent="Não foi possível entrar. Confira e-mail e senha."}};
+async function load(){const r=await fetch(SB.url+"/rest/v1/config?id=eq.1&select=data",{headers:H()}),D=(await r.json())[0].data||{};
+$("#lg").hidden=true;$("#pn").hidden=false;$("#op").value=D.open||"auto";$("#av").value=D.aviso===undefined?"":D.aviso;
+$("#pz").innerHTML=PZ.map(([n,m,g],i)=>{const p=(D.price||{})[n]||[m,g];return`<div class="r"><span>${n}</span><input type="number" step="0.5" id="m${i}" value="${p[0]}"><input type="number" step="0.5" id="g${i}" value="${p[1]}"><label><input type="checkbox" id="o${i}" ${(D.off||[]).includes(n)?"checked":""}>Em falta</label></div>`}).join("");
+$("#br").innerHTML=BR.map(([n,p],i)=>`<div class="r b"><span>${n}</span><input type="number" step="0.5" id="b${i}" value="${(D.bp||{})[n]??p}"><label><input type="checkbox" id="c${i}" ${(D.boff||[]).includes(n)?"checked":""}>Em falta</label></div>`).join("")}
+$("#sv").onclick=async()=>{const d={open:$("#op").value,aviso:$("#av").value.trim(),price:{},off:[],bp:{},boff:[]};
+PZ.forEach(([n],i)=>{d.price[n]=[+$("#m"+i).value,+$("#g"+i).value];if($("#o"+i).checked)d.off.push(n)});
+BR.forEach(([n],i)=>{d.bp[n]=+$("#b"+i).value;if($("#c"+i).checked)d.boff.push(n)});
+try{const r=await fetch(SB.url+"/rest/v1/config?id=eq.1",{method:"PATCH",headers:{...H(),Prefer:"return=minimal"},body:JSON.stringify({data:d})});$("#m").textContent=r.ok?"✓ Salvo! O site já está atualizado.":"Erro ao salvar. Entre de novo."}catch(x){$("#m").textContent="Erro de conexão."}};
+</script></body></html>
 
